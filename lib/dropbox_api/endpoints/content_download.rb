@@ -16,7 +16,7 @@ module DropboxApi::Endpoints
         'Content-Type' => ''
       }
       headers.merge!(range_param) if range_param
-      body, headers
+      return body, headers
     end
 
     def perform_request(params)
