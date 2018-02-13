@@ -19,7 +19,7 @@ module DropboxApi::Endpoints
       # Official Dropbox documentation for HTTP error codes:
       # https://www.dropbox.com/developers/documentation/http/documentation#error-handling
       case raw_response.status
-      when 200, 409
+      when 200, 206, 409
         # Status code 409 is "Endpoint-specific error". We need to look at
         # the response body to build an exception.
         build_result(raw_response.env[:api_result])

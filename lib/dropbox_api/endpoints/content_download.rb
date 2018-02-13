@@ -7,11 +7,20 @@ module DropboxApi::Endpoints
     end
 
     def build_request(params)
+      # params.merge!({"Range": "bytes=10-25"})
+      # puts params
       body = nil
+      range = params[:range]
+      puts "Params: #{params}"
+      puts "Range: #{params[:range]}"
+      range_param = { "Range": "bytes=#{range.min}-#{range.max}" } if range
+      params.delete(:range)
       headers = {
         'Dropbox-API-Arg' => JSON.dump(params),
         'Content-Type' => ''
       }
+      headers.merge!(range_param) if range_param
+      puts "Headers: #{headers}"
 
       return body, headers
     end
